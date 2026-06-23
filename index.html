@@ -3,16 +3,25 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Portfolio | Suz Didolène Massamouna</title>
-
-  <!-- Google Fonts -->
+  <title>Portfolio | Suz Didolène Massamouna — Data Analyst</title>
+  <meta name="description" content="Portfolio de Suz Didolène Massamouna, Data Analyst et Experte en Systèmes d'Information basée à Lyon. Power BI, SQL, Python, modélisation de données." />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
-
-  <!-- Font Awesome CDN pour les icônes -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-
   <style>
-    /* --- Styles Globaux & Thème Blanc Premium --- */
+    :root {
+      --primary: #6b4eff;
+      --primary-dark: #4c32cb;
+      --primary-hover: #5639e6;
+      --accent: #ffd166;
+      --ink: #1a1a1a;
+      --text: #4a5568;
+      --muted: #718096;
+      --soft: #f4f0ff;
+      --border: #e2e8f0;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 80px; }
     body {
       font-family: 'Montserrat', sans-serif;
       background-color: #ffffff;
@@ -20,23 +29,16 @@
       margin: 0;
       padding: 0;
       line-height: 1.6;
-      scroll-behavior: smooth;
     }
-
     h1, h2, h3, h4 {
-      color: #6b4eff; /* Violet principal */
+      color: var(--primary);
       margin-bottom: 1rem;
       font-weight: 700;
     }
+    a { color: inherit; text-decoration: none; }
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    /* --- Navbar --- */
     .navbar {
-      background-color: #6b4eff;
+      background-color: var(--primary);
       padding: 1.2rem 3rem;
       display: flex;
       justify-content: center;
@@ -45,27 +47,23 @@
       top: 0;
       z-index: 100;
     }
-
     .navbar ul {
       list-style: none;
       display: flex;
-      gap: 2.5rem;
+      gap: 2.2rem;
       margin: 0;
       padding: 0;
+      flex-wrap: wrap;
+      justify-content: center;
     }
-
     .navbar a {
       color: #fff;
       font-weight: 600;
       font-size: 1.05rem;
       transition: color 0.3s ease;
     }
+    .navbar a:hover { color: var(--accent); }
 
-    .navbar a:hover {
-      color: #ffd166; /* Note chaleureuse au survol */
-    }
-
-    /* --- Header / Profil Épuré --- */
     .header-container {
       display: flex;
       align-items: center;
@@ -75,151 +73,176 @@
       margin: 0 auto;
       text-align: left;
     }
-
-    .photo {
-      flex-shrink: 0;
-    }
-
+    .photo { flex-shrink: 0; }
     .profile-pic {
       width: 220px;
       height: 220px;
       border-radius: 50%;
       object-fit: cover;
-      border: 5px solid #6b4eff;
+      border: 5px solid var(--primary);
       box-shadow: 0 8px 24px rgba(107, 78, 255, 0.15);
       transition: transform 0.3s ease;
     }
-
-    .profile-pic:hover {
-      transform: scale(1.03);
-    }
-
+    .profile-pic:hover { transform: scale(1.03); }
     .header-text h1 {
       font-size: 3rem;
       margin: 0 0 0.5rem 0;
       letter-spacing: -0.5px;
-      color: #1a1a1a;
+      color: var(--ink);
     }
-
     .header-text .subtitle {
       font-size: 1.4rem;
-      color: #6b4eff;
+      color: var(--primary);
       font-weight: 600;
       margin-top: 0;
       margin-bottom: 1.5rem;
     }
-
     .header-text .description {
       margin: 1rem 0 2.5rem 0;
       font-weight: 500;
-      color: #4a5568;
+      color: var(--text);
       font-size: 1.05rem;
       max-width: 750px;
       text-align: justify;
     }
-
-    /* --- Groupe de boutons d'action --- */
     .buttons {
       display: flex;
       gap: 1rem;
       flex-wrap: wrap;
     }
-
     .btn-action {
       display: inline-flex;
       align-items: center;
       gap: 0.6rem;
       padding: 0.75rem 1.8rem;
-      background-color: #6b4eff;
+      background-color: var(--primary);
       color: #fff;
       font-weight: 700;
       border-radius: 30px;
       box-shadow: 0 6px 14px rgba(107, 78, 255, 0.2);
       transition: all 0.3s ease;
       font-size: 0.95rem;
+      border: none;
+      cursor: pointer;
     }
-
     .btn-action.btn-secondary {
       background-color: #ffffff;
-      color: #6b4eff;
-      border: 2px solid #6b4eff;
+      color: var(--primary);
+      border: 2px solid var(--primary);
       box-shadow: none;
     }
-
     .btn-action:hover {
-      background-color: #5639e6;
+      background-color: var(--primary-hover);
       box-shadow: 0 8px 20px rgba(107, 78, 255, 0.4);
       transform: translateY(-2px);
     }
-
     .btn-action.btn-secondary:hover {
-      background-color: #f4f0ff;
-      color: #5639e6;
-      border-color: #5639e6;
-      box-shadow: none;
+      background-color: var(--soft);
+      color: var(--primary-hover);
+      border-color: var(--primary-hover);
     }
 
-    /* --- Bandeau Défilant Professionnel --- */
     .scrolling-text {
       background-color: #fbfbfe;
-      color: #6b4eff;
+      color: var(--primary);
       font-weight: 700;
       padding: 0.9rem 0;
       white-space: nowrap;
       overflow: hidden;
-      position: relative;
       font-size: 1.05rem;
       max-width: 1100px;
       margin: 0 auto 4rem auto;
       border-radius: 12px;
       border: 1px solid rgba(107, 78, 255, 0.12);
     }
-
     .scrolling-text p {
       display: inline-block;
       padding-left: 100%;
       animation: scroll-left 22s linear infinite;
       margin: 0;
     }
-
     @keyframes scroll-left {
-      0% { transform: translateX(0%); }
+      0%   { transform: translateX(0%); }
       100% { transform: translateX(-100%); }
     }
 
-    /* --- Conteneurs de Sections --- */
     .section-container {
       padding: 4rem 1rem;
       max-width: 1100px;
       margin: 0 auto;
     }
-
     .section-title {
       text-align: center;
       margin-bottom: 3.5rem;
       font-weight: 700;
       font-size: 2.2rem;
-      color: #1a1a1a;
+      color: var(--ink);
     }
-
     .section-title::after {
       content: '';
       display: block;
       width: 50px;
       height: 4px;
-      background-color: #6b4eff;
+      background-color: var(--primary);
       margin: 0.7rem auto 0 auto;
       border-radius: 2px;
     }
 
-    /* --- Blocs Compétences --- */
+    /* À propos */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+    .about-text p {
+      color: var(--text);
+      font-weight: 500;
+      font-size: 1.02rem;
+      text-align: justify;
+      margin-top: 0;
+    }
+    .about-text p + p { margin-top: 1.2rem; }
+    .about-highlight {
+      color: var(--primary);
+      font-weight: 700;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.2rem;
+    }
+    .stat-box {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: #fff;
+      border-radius: 16px;
+      padding: 1.6rem 1rem;
+      text-align: center;
+      box-shadow: 0 6px 20px rgba(107, 78, 255, 0.18);
+    }
+    .stat-box .num {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: #fff;
+      display: block;
+      line-height: 1.1;
+    }
+    .stat-box .label {
+      font-size: 0.82rem;
+      color: #e1dbff;
+      font-weight: 600;
+      margin-top: 0.4rem;
+      display: block;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+
     .skills-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       gap: 2rem;
       margin-bottom: 2.5rem;
     }
-
     .skill-block {
       background-color: #ffffff;
       border: 2px solid #f0edff;
@@ -227,13 +250,9 @@
       padding: 1.8rem;
       transition: border-color 0.3s ease;
     }
-
-    .skill-block:hover {
-      border-color: #6b4eff;
-    }
-
+    .skill-block:hover { border-color: var(--primary); }
     .skill-block h4 {
-      color: #6b4eff;
+      color: var(--primary);
       margin-top: 0;
       margin-bottom: 1rem;
       font-size: 1.15rem;
@@ -241,26 +260,19 @@
       align-items: center;
       gap: 0.6rem;
     }
-
-    .skill-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.6rem;
-    }
-
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 0.6rem; }
     .tag {
       background-color: #f8f7ff;
       border: 1px solid #e1dbff;
-      color: #4c32cb;
+      color: var(--primary-dark);
       padding: 0.4rem 0.8rem;
       border-radius: 8px;
       font-size: 0.85rem;
       font-weight: 600;
     }
 
-    /* Encadré Certification PL-300 */
     .certif-card {
-      background: linear-gradient(135deg, #6b4eff, #4c32cb);
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
       color: #fff;
       border-radius: 16px;
       padding: 1.5rem 2rem;
@@ -269,35 +281,18 @@
       gap: 1.5rem;
       box-shadow: 0 6px 20px rgba(107, 78, 255, 0.15);
     }
+    .certif-card h4 { color: #fff; margin: 0 0 0.3rem 0; font-size: 1.2rem; }
+    .certif-card p { margin: 0; font-size: 0.95rem; color: #e1dbff; font-weight: 500; }
+    .certif-icon { font-size: 2.5rem; color: var(--accent); }
 
-    .certif-card h4 {
-      color: #fff;
-      margin: 0 0 0.3rem 0;
-      font-size: 1.2rem;
-    }
-
-    .certif-card p {
-      margin: 0;
-      font-size: 0.95rem;
-      color: #e1dbff;
-      font-weight: 500;
-    }
-
-    .certif-icon {
-      font-size: 2.5rem;
-      color: #ffd166;
-    }
-
-    /* --- Cartes des Projets --- */
     .projet-cards {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
       gap: 2.5rem;
     }
-
     .card {
       background-color: #ffffff;
-      border: 2px solid #e2e8f0;
+      border: 2px solid var(--border);
       border-radius: 16px;
       padding: 2.2rem;
       transition: all 0.3s ease;
@@ -305,13 +300,11 @@
       flex-direction: column;
       justify-content: space-between;
     }
-
     .card:hover {
-      border-color: #6b4eff;
+      border-color: var(--primary);
       box-shadow: 0 12px 24px rgba(107, 78, 255, 0.08);
       transform: translateY(-4px);
     }
-
     .card-meta {
       display: flex;
       justify-content: space-between;
@@ -322,57 +315,47 @@
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
-
     .card h3 {
       font-size: 1.35rem;
       margin-top: 0;
-      color: #1a1a1a;
+      color: var(--ink);
       display: flex;
       align-items: center;
       gap: 0.7rem;
     }
-
-    .card h3 i {
-      color: #6b4eff;
-    }
-
+    .card h3 i { color: var(--primary); }
     .card p {
       font-weight: 500;
-      color: #4a5568;
+      color: var(--text);
       font-size: 0.95rem;
       margin-bottom: 1.8rem;
       line-height: 1.6;
       flex-grow: 1;
     }
-
     .focus-text {
       font-size: 0.85rem;
       font-weight: 600;
-      color: #6b4eff;
-      background-color: #f4f0ff;
+      color: var(--primary);
+      background-color: var(--soft);
       padding: 0.4rem 0.8rem;
       border-radius: 6px;
       display: inline-block;
     }
 
-    /* --- Parcours Chronologique --- */
     .timeline-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
       gap: 4rem;
     }
-
     .timeline {
       border-left: 3px solid #f0edff;
       padding-left: 1.8rem;
       position: relative;
     }
-
     .timeline-item {
       position: relative;
       margin-bottom: 2.5rem;
     }
-
     .timeline-item::before {
       content: '';
       position: absolute;
@@ -381,128 +364,249 @@
       width: 10px;
       height: 10px;
       border-radius: 50%;
-      background-color: #6b4eff;
+      background-color: var(--primary);
       border: 3px solid #fff;
     }
-
     .timeline-date {
       font-size: 0.85rem;
       font-weight: 700;
-      color: #6b4eff;
+      color: var(--primary);
       text-transform: uppercase;
     }
-
     .timeline-item h4 {
       margin: 0.3rem 0 0.1rem 0;
       font-size: 1.15rem;
-      color: #1a1a1a;
+      color: var(--ink);
     }
-
     .timeline-company {
       font-size: 0.95rem;
       font-weight: 600;
-      color: #718096;
+      color: var(--muted);
       margin-bottom: 0.7rem;
     }
-
     .timeline-item ul {
       margin: 0;
       padding-left: 1.2rem;
       font-size: 0.95rem;
-      color: #4a5568;
+      color: var(--text);
+    }
+    .timeline-item ul li { margin-bottom: 0.4rem; }
+
+    /* Contact */
+    #contact { background-color: #fbfbfe; }
+    .contact-wrapper { max-width: 1100px; margin: 0 auto; }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.3fr;
+      gap: 3rem;
+      align-items: start;
+    }
+    .contact-intro p {
+      color: var(--text);
+      font-weight: 500;
+      font-size: 1.02rem;
+      margin-top: 0;
+    }
+    .contact-list { list-style: none; padding: 0; margin: 2rem 0 0 0; }
+    .contact-list li {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.2rem;
+      font-weight: 600;
+      color: var(--ink);
+    }
+    .contact-list i {
+      width: 44px;
+      height: 44px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--soft);
+      color: var(--primary);
+      border-radius: 12px;
+      font-size: 1.1rem;
+    }
+    .contact-list a:hover { color: var(--primary); }
+
+    .contact-form {
+      background-color: #fff;
+      border: 2px solid #f0edff;
+      border-radius: 16px;
+      padding: 2.2rem;
+      box-shadow: 0 8px 24px rgba(107, 78, 255, 0.06);
+    }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+    .form-group { margin-bottom: 1.3rem; }
+    .form-group label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 0.5rem;
+    }
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      font-family: inherit;
+      font-size: 0.95rem;
+      color: #2d3748;
+      transition: border-color 0.25s ease;
+      background-color: #fff;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+    .form-group textarea { resize: vertical; min-height: 130px; }
+    .contact-form .btn-action { width: 100%; justify-content: center; }
+    .form-note {
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-top: 1rem;
+      text-align: center;
     }
 
-    .timeline-item ul li {
-      margin-bottom: 0.4rem;
-    }
-
-    /* --- Footer --- */
     footer {
       text-align: center;
-      padding: 2.5rem 0;
-      background-color: #6b4eff;
+      padding: 2.5rem 1rem;
+      background-color: var(--primary);
       color: #fff;
       font-weight: 600;
-      margin-top: 5rem;
       font-size: 0.95rem;
     }
+    .footer-social {
+      display: flex;
+      justify-content: center;
+      gap: 1.2rem;
+      margin-bottom: 1.2rem;
+    }
+    .footer-social a {
+      width: 42px;
+      height: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: rgba(255, 255, 255, 0.15);
+      border-radius: 50%;
+      color: #fff;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+    }
+    .footer-social a:hover { background-color: var(--accent); color: var(--primary-dark); transform: translateY(-3px); }
 
-    /* --- Responsive --- */
     @media screen and (max-width: 900px) {
+      .navbar { padding: 1rem 1rem; }
       .header-container {
         flex-direction: column;
         text-align: center;
         gap: 2rem;
         padding: 3rem 1rem;
       }
-      .header-text h1 {
-        font-size: 2.4rem;
-      }
-      .buttons {
-        justify-content: center;
-      }
-      .timeline-grid {
-        grid-template-columns: 1fr;
-        gap: 3rem;
-      }
+      .header-text h1 { font-size: 2.4rem; }
+      .header-text .description { text-align: left; }
+      .buttons { justify-content: center; }
+      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .timeline-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .timeline { border-left-width: 2px; }
+      .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .form-row { grid-template-columns: 1fr; }
     }
   </style>
 </head>
-
 <body>
 
-  <!-- Menu de navigation -->
   <nav class="navbar" role="navigation" aria-label="Menu principal">
     <ul>
       <li><a href="#accueil">Accueil</a></li>
+      <li><a href="#apropos">À propos</a></li>
       <li><a href="#competences">Compétences</a></li>
-      <li><a href="#projets">Projets Data</a></li>
+      <li><a href="#projets">Projets</a></li>
       <li><a href="#parcours">Parcours</a></li>
+      <li><a href="#contact">Me contacter</a></li>
     </ul>
   </nav>
 
-  <!-- En-tête / Profil Professionnel -->
+  <!-- ENTÊTE -->
   <header id="accueil" class="header-container">
     <div class="photo">
-      <!-- Ta photo doit être placée dans le dossier : images/suz.jpeg -->
       <img src="suz.jpeg" alt="Portrait de Suz Didolène Massamouna" class="profile-pic" />
     </div>
     <div class="header-text">
       <h1>Suz Didolène Massamouna</h1>
-      <p class="subtitle">Data Analyst | Expert en Systèmes d'Information</p>
-      
+      <p class="subtitle">Data Analyst | Experte en Systèmes d'Information</p>
       <p class="description">
-        Expert en Systèmes d'Information (Bac+5) et forte d'une solide expérience en administration systèmes et réseaux, j'évolue aujourd'hui vers la Data Analysis. Mon parcours technique m'a permis de maîtriser la gestion de bases de données, l'intégrité des systèmes et la structuration de l'information. Aujourd’hui, je combine cette rigueur infrastructurelle avec des compétences analytiques pour transformer les données brutes en leviers de décision stratégiques.
+        Experte en Systèmes d'Information (Bac+5) et forte d'une solide expérience en administration systèmes et réseaux, j'évolue aujourd'hui vers la Data Analysis. Mon parcours technique m'a permis de maîtriser la gestion de bases de données, l'intégrité des systèmes et la structuration de l'information. Aujourd'hui, je combine cette rigueur infrastructurelle avec des compétences analytiques pour transformer les données brutes en leviers de décision stratégiques.
       </p>
-
       <div class="buttons">
-        <!-- Lien LinkedIn Officiel -->
-        <a href="https://www.linkedin.com/in/suz-didolene-massamouna" target="_blank" rel="noopener" class="btn-action" aria-label="Consulter mon profil LinkedIn">
+        <a href="#contact" class="btn-action">
+          <i class="fa-solid fa-paper-plane"></i> Me contacter
+        </a>
+        <a href="https://www.linkedin.com/in/suz-didolene-massamouna/" target="_blank" rel="noopener noreferrer" class="btn-action btn-secondary">
           <i class="fa-brands fa-linkedin"></i> LinkedIn
         </a>
-        <!-- Lien GitHub Officiel -->
-        <a href="https://github.com/suz5678" target="_blank" rel="noopener" class="btn-action btn-secondary" aria-label="Consulter mon GitHub">
+        <a href="https://github.com/suzy5670" target="_blank" rel="noopener noreferrer" class="btn-action btn-secondary">
           <i class="fa-brands fa-github"></i> GitHub
         </a>
-        <!-- Téléchargement CV -->
-        <a href="Suz_Massamouna_Bouingui_CV.pdf" target="_blank" rel="noopener" download class="btn-action btn-secondary" aria-label="Télécharger mon CV au format PDF">
+        <a href="https://suzy5670.github.io/" target="_blank" rel="noopener noreferrer" class="btn-action btn-secondary">
+          <i class="fa-solid fa-globe"></i> Mon site
+        </a>
+        <a href="CV-Suz-Massamouna-Data-Analyst.pdf" target="_blank" rel="noopener noreferrer" download class="btn-action btn-secondary">
           <i class="fa-solid fa-file-arrow-down"></i> Télécharger le CV
         </a>
       </div>
     </div>
   </header>
 
-  <!-- Bandeau de compétences clés défilant -->
   <section class="scrolling-text" aria-label="Expertises défilantes">
-    <p>Analyse de Données • SQL • Excel (Avancé) • Power BI / Tableau • Modélisation de Données • Gestion des Sauvegardes • Basée à Lyon</p>
+    <p>Analyse de Données • SQL • Excel (Avancé) • Power BI / Tableau • Modélisation de Données • Python • Basée à Lyon</p>
   </section>
 
-  <!-- Section Compétences & Certifications -->
+  <!-- À PROPOS / PROFIL -->
+  <section id="apropos" class="section-container">
+    <h2 class="section-title">À propos de moi</h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>
+          Issue du monde de l'<span class="about-highlight">infrastructure et de la gouvernance des systèmes d'information</span>, j'ai passé plusieurs années à garantir l'intégrité, la sécurité et la disponibilité des données au sein d'environnements techniques exigeants.
+        </p>
+        <p>
+          Cette expérience m'a naturellement conduite vers la <span class="about-highlight">Data Analysis</span> : analyser des indicateurs de performance, modéliser des flux d'incidents ou auditer des droits d'accès, c'est déjà transformer la donnée en information utile. Aujourd'hui, je mets cette rigueur au service de la <span class="about-highlight">prise de décision</span>, avec des outils comme Power BI, SQL et Python.
+        </p>
+        <p>
+          Basée à <span class="about-highlight">Lyon</span>, je suis à la recherche de nouveaux défis où la donnée devient un véritable levier stratégique.
+        </p>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-box">
+          <span class="num">3+</span>
+          <span class="label">Années d'expérience SI</span>
+        </div>
+        <div class="stat-box">
+          <span class="num">200</span>
+          <span class="label">Collaborateurs gérés</span>
+        </div>
+        <div class="stat-box">
+          <span class="num">Bac+5</span>
+          <span class="label">Expertise SI</span>
+        </div>
+        <div class="stat-box">
+          <span class="num">PL-300</span>
+          <span class="label">Certification en cours</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPÉTENCES -->
   <section id="competences" class="section-container">
     <h2 class="section-title">Expertises & Hard Skills</h2>
-    
     <div class="skills-grid">
-      <!-- Bloc Hard Skills Spécifié -->
       <div class="skill-block">
         <h4><i class="fa-solid fa-chart-line"></i> Data & Business Intelligence</h4>
         <div class="skill-tags">
@@ -514,8 +618,6 @@
           <span class="tag">Modélisation de données</span>
         </div>
       </div>
-
-      <!-- Bloc Infrastructure SI -->
       <div class="skill-block">
         <h4><i class="fa-solid fa-server"></i> Gouvernance & Infrastructure SI</h4>
         <div class="skill-tags">
@@ -526,8 +628,6 @@
           <span class="tag">Intégrité des Systèmes</span>
         </div>
       </div>
-
-      <!-- Bloc Soft Skills Spécifié -->
       <div class="skill-block">
         <h4><i class="fa-solid fa-brain"></i> Soft Skills & Management</h4>
         <div class="skill-tags">
@@ -538,12 +638,8 @@
         </div>
       </div>
     </div>
-
-    <!-- Certification PL-300 -->
     <div class="certif-card">
-      <div class="certif-icon">
-        <i class="fa-solid fa-circle-check"></i>
-      </div>
+      <div class="certif-icon"><i class="fa-solid fa-circle-check"></i></div>
       <div>
         <h4>Microsoft Certified: Power BI Data Analyst Associate (PL-300)</h4>
         <p>Certification officielle — En cours de finalisation</p>
@@ -551,57 +647,44 @@
     </div>
   </section>
 
-  <!-- Section Réalisations -->
+  <!-- PROJETS -->
   <section id="projets" class="section-container">
     <h2 class="section-title">Projets Data Récents</h2>
-    
     <div class="projet-cards">
-      <!-- Projet 1 -->
-      <article class="card" tabindex="0" aria-label="Dashboard de Performance Réseau & Incidents">
+      <article class="card" tabindex="0">
         <div class="card-meta">
           <span>Ingénierie BI</span>
           <span>2026</span>
         </div>
-        <h3><i class="fa-solid fa-chart-column" aria-hidden="true"></i> Dashboard Analytique • Performance ITSM</h3>
+        <h3><i class="fa-solid fa-chart-column"></i> Dashboard Analytique • Performance ITSM</h3>
         <p>Centralisation et modélisation de flux d'incidents issus de plateformes SI. Création d'une interface d'aide à la décision mesurant les volumes critiques et automatisant le calcul des délais de résolution.</p>
-        <div>
-          <span class="focus-text">Power BI • Excel • Data Modeling</span>
-        </div>
+        <span class="focus-text">Power BI • Excel • Data Modeling</span>
       </article>
-
-      <!-- Projet 2 -->
-      <article class="card" tabindex="0" aria-label="Pipeline Data Quality & Cleaning en Python">
+      <article class="card" tabindex="0">
         <div class="card-meta">
           <span>Développement Data</span>
           <span>2026</span>
         </div>
-        <h3><i class="fa-solid fa-gears" aria-hidden="true"></i> Pipeline Automation • Data Quality</h3>
+        <h3><i class="fa-solid fa-gears"></i> Pipeline Automation • Data Quality</h3>
         <p>Conception d'un script d'industrialisation pour le nettoyage de bases de données métiers complexes. Traitement automatisé des valeurs manquantes, dédoublonnage strict et standardisation des formats de données.</p>
-        <div>
-          <span class="focus-text">Python • Pandas • Jupyter</span>
-        </div>
+        <span class="focus-text">Python • Pandas • Jupyter</span>
       </article>
-
-      <!-- Projet 3 -->
-      <article class="card" tabindex="0" aria-label="Audit Référentiels Utilisateurs SI">
+      <article class="card" tabindex="0">
         <div class="card-meta">
           <span>Sécurité & Audit Data</span>
           <span>2025</span>
         </div>
-        <h3><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> Audit Analytique • Gouvernance Droits SI</h3>
+        <h3><i class="fa-solid fa-shield-halved"></i> Audit Analytique • Gouvernance Droits SI</h3>
         <p>Analyse croisée de tables d'accès utilisateurs pour cartographier les habilitations. Extraction des anomalies de droits et génération d'un rapport de conformité pour la sécurisation du système d'information.</p>
-        <div>
-          <span class="focus-text">Active Directory • Audit de Données</span>
-        </div>
+        <span class="focus-text">Active Directory • Audit de Données</span>
       </article>
     </div>
   </section>
 
-  <!-- Section Parcours Professionnel -->
+  <!-- PARCOURS : EXPÉRIENCE + FORMATION -->
   <section id="parcours" class="section-container">
+    <h2 class="section-title">Parcours</h2>
     <div class="timeline-grid">
-      
-      <!-- Expériences -->
       <div>
         <h3 style="margin-bottom: 2.5rem;"><i class="fa-solid fa-briefcase"></i> Expériences Clés</h3>
         <div class="timeline">
@@ -615,7 +698,6 @@
               <li><strong>Gouvernance & Sauvegardes :</strong> Audit régulier des attributions de licences cloud et sécurisation des processus de sauvegarde des données.</li>
             </ul>
           </div>
-
           <div class="timeline-item">
             <span class="timeline-date">2022 – 2023</span>
             <h4>Technicienne Support Informatique</h4>
@@ -626,8 +708,6 @@
           </div>
         </div>
       </div>
-
-      <!-- Formations -->
       <div>
         <h3 style="margin-bottom: 2.5rem;"><i class="fa-solid fa-graduation-cap"></i> Parcours Académique</h3>
         <div class="timeline">
@@ -636,7 +716,6 @@
             <h4>Master Expert en Gestion de Projet Système d'Information</h4>
             <div class="timeline-company">Doranco Suptech</div>
           </div>
-
           <div class="timeline-item">
             <span class="timeline-date">2021 – 2023</span>
             <h4>Licence Systèmes, Réseaux et Sécurité Informatique</h4>
@@ -644,14 +723,111 @@
           </div>
         </div>
       </div>
-
     </div>
   </section>
 
-  <!-- Pied de page -->
+  <!-- ME CONTACTER -->
+  <section id="contact" class="section-container">
+    <div class="contact-wrapper">
+      <h2 class="section-title">Me contacter</h2>
+      <div class="contact-grid">
+        <div class="contact-intro">
+          <p>
+            Une opportunité, une question ou simplement l'envie d'échanger autour de la donnée ?
+            N'hésitez pas à me laisser un message, je vous répondrai avec plaisir.
+          </p>
+          <ul class="contact-list">
+            <li>
+              <i class="fa-solid fa-envelope"></i>
+              <a href="mailto:mdane230@gmail.com">mdane230@gmail.com</a>
+            </li>
+            <li>
+              <i class="fa-solid fa-location-dot"></i>
+              <span>Lyon, France</span>
+            </li>
+            <li>
+              <i class="fa-brands fa-linkedin"></i>
+              <a href="https://www.linkedin.com/in/suz-didolene-massamouna/" target="_blank" rel="noopener noreferrer">linkedin.com/in/suz-didolene-massamouna</a>
+            </li>
+            <li>
+              <i class="fa-brands fa-github"></i>
+              <a href="https://github.com/suzy5670" target="_blank" rel="noopener noreferrer">github.com/suzy5670</a>
+            </li>
+            <li>
+              <i class="fa-solid fa-globe"></i>
+              <a href="https://suzy5670.github.io/" target="_blank" rel="noopener noreferrer">suzy5670.github.io</a>
+            </li>
+          </ul>
+        </div>
+
+        <!--
+          FORMULAIRE DE CONTACT
+          Par défaut : ouvre la messagerie du visiteur (aucun compte requis).
+          Pour recevoir les messages directement par e-mail, créez un compte gratuit
+          sur https://formspree.io , puis :
+            1. Remplacez l'attribut onsubmit du <form> par : action="https://formspree.io/f/VOTRE_ID" method="POST"
+            2. Supprimez l'attribut onsubmit="..."
+        -->
+        <form class="contact-form" onsubmit="return envoyerMessage(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="nom">Nom</label>
+              <input type="text" id="nom" name="nom" placeholder="Votre nom" required />
+            </div>
+            <div class="form-group">
+              <label for="email">E-mail</label>
+              <input type="email" id="email" name="email" placeholder="vous@exemple.com" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="sujet">Sujet</label>
+            <input type="text" id="sujet" name="sujet" placeholder="Objet de votre message" required />
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" placeholder="Votre message..." required></textarea>
+          </div>
+          <button type="submit" class="btn-action">
+            <i class="fa-solid fa-paper-plane"></i> Envoyer le message
+          </button>
+          <p class="form-note">Votre logiciel de messagerie s'ouvrira pour finaliser l'envoi.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
   <footer>
+    <div class="footer-social">
+      <a href="https://www.linkedin.com/in/suz-didolene-massamouna/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+      <a href="https://github.com/suzy5670" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+      <a href="https://suzy5670.github.io/" target="_blank" rel="noopener noreferrer" aria-label="Mon site"><i class="fa-solid fa-globe"></i></a>
+      <a href="mailto:mdane230@gmail.com" aria-label="E-mail"><i class="fa-solid fa-envelope"></i></a>
+    </div>
     <p>© 2026 Suz Didolène Massamouna | Data Analyst & SI Specialist</p>
   </footer>
+
+  <script>
+    // Envoi du formulaire via le client mail du visiteur (aucun serveur requis).
+    function envoyerMessage(e) {
+      e.preventDefault();
+      var nom = document.getElementById('nom').value;
+      var email = document.getElementById('email').value;
+      var sujet = document.getElementById('sujet').value;
+      var message = document.getElementById('message').value;
+
+      var corps =
+        'Nom : ' + nom + '\n' +
+        'E-mail : ' + email + '\n\n' +
+        message;
+
+      var lien = 'mailto:mdane230@gmail.com'
+        + '?subject=' + encodeURIComponent('[Portfolio] ' + sujet)
+        + '&body=' + encodeURIComponent(corps);
+
+      window.location.href = lien;
+      return false;
+    }
+  </script>
 
 </body>
 </html>
