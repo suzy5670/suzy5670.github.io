@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Me contacter | Suz Didolène Massamouna</title>
+  <meta name="description" content="Contactez Suz Didolène Massamouna, Data Analyst à Lyon : formulaire, e-mail, LinkedIn, GitHub." />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <nav class="navbar" role="navigation" aria-label="Menu principal">
+    <ul>
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="apropos.html">À propos</a></li>
+      <li><a href="competences.html">Compétences</a></li>
+      <li><a href="projets.html">Projets</a></li>
+      <li><a href="parcours.html">Parcours</a></li>
+      <li><a href="contact.html" class="active">Me contacter</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section class="section-container">
+      <h2 class="section-title">Me contacter</h2>
+      <div class="contact-grid">
+        <div class="contact-intro">
+          <p>
+            Une opportunité, une question ou simplement l'envie d'échanger autour de la donnée ?
+            N'hésitez pas à me laisser un message, je vous répondrai avec plaisir.
+          </p>
+          <ul class="contact-list">
+            <li>
+              <i class="fa-solid fa-envelope"></i>
+              <a href="mailto:mdane230@gmail.com">mdane230@gmail.com</a>
+            </li>
+            <li>
+              <i class="fa-solid fa-location-dot"></i>
+              <span>Lyon, France</span>
+            </li>
+            <li>
+              <i class="fa-brands fa-linkedin"></i>
+              <a href="https://www.linkedin.com/in/suz-didolene-massamouna/" target="_blank" rel="noopener noreferrer">linkedin.com/in/suz-didolene-massamouna</a>
+            </li>
+            <li>
+              <i class="fa-brands fa-github"></i>
+              <a href="https://github.com/suzy5670" target="_blank" rel="noopener noreferrer">github.com/suzy5670</a>
+            </li>
+            <li>
+              <i class="fa-solid fa-globe"></i>
+              <a href="https://suzy5670.github.io/" target="_blank" rel="noopener noreferrer">suzy5670.github.io</a>
+            </li>
+          </ul>
+        </div>
+
+        <!--
+          FORMULAIRE DE CONTACT
+          Par défaut : ouvre la messagerie du visiteur (aucun compte requis).
+          Pour recevoir les messages directement par e-mail, créez un compte gratuit
+          sur https://formspree.io , puis :
+            1. Remplacez onsubmit du <form> par : action="https://formspree.io/f/VOTRE_ID" method="POST"
+            2. Supprimez l'attribut onsubmit="..."
+        -->
+        <form class="contact-form" onsubmit="return envoyerMessage(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="nom">Nom</label>
+              <input type="text" id="nom" name="nom" placeholder="Votre nom" required />
+            </div>
+            <div class="form-group">
+              <label for="email">E-mail</label>
+              <input type="email" id="email" name="email" placeholder="vous@exemple.com" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="sujet">Sujet</label>
+            <input type="text" id="sujet" name="sujet" placeholder="Objet de votre message" required />
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" placeholder="Votre message..." required></textarea>
+          </div>
+          <button type="submit" class="btn-action">
+            <i class="fa-solid fa-paper-plane"></i> Envoyer le message
+          </button>
+          <p class="form-note">Votre logiciel de messagerie s'ouvrira pour finaliser l'envoi.</p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-social">
+      <a href="https://www.linkedin.com/in/suz-didolene-massamouna/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+      <a href="https://github.com/suzy5670" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+      <a href="https://suzy5670.github.io/" target="_blank" rel="noopener noreferrer" aria-label="Mon site"><i class="fa-solid fa-globe"></i></a>
+      <a href="mailto:mdane230@gmail.com" aria-label="E-mail"><i class="fa-solid fa-envelope"></i></a>
+    </div>
+    <p>© 2026 Suz Didolène Massamouna | Data Analyst & SI Specialist</p>
+  </footer>
+
+  <script>
+    // Envoi du formulaire via le client mail du visiteur (aucun serveur requis).
+    function envoyerMessage(e) {
+      e.preventDefault();
+      var nom = document.getElementById('nom').value;
+      var email = document.getElementById('email').value;
+      var sujet = document.getElementById('sujet').value;
+      var message = document.getElementById('message').value;
+
+      var corps =
+        'Nom : ' + nom + '\n' +
+        'E-mail : ' + email + '\n\n' +
+        message;
+
+      var lien = 'mailto:mdane230@gmail.com'
+        + '?subject=' + encodeURIComponent('[Portfolio] ' + sujet)
+        + '&body=' + encodeURIComponent(corps);
+
+      window.location.href = lien;
+      return false;
+    }
+  </script>
+
+</body>
+</html>
