@@ -131,6 +131,34 @@
     font-family:inherit;font-size:.88rem;resize:vertical;min-height:64px;color:var(--ink);background:#fbfcff}
   .notes textarea:focus{outline:none;border-color:var(--indigo)}
 
+  /* ===== Ressources ===== */
+  .resources{background:var(--card);border-radius:20px;box-shadow:var(--shadow);
+    border:1px solid var(--line);margin-bottom:26px;overflow:hidden}
+  .res-head{padding:18px 24px;cursor:pointer;display:flex;align-items:center;gap:14px;user-select:none;
+    background:linear-gradient(120deg,#0f172a,#334155);color:#fff}
+  .res-head .emoji{font-size:1.7rem}
+  .res-head .htxt{flex:1}
+  .res-head h2{font-size:1.15rem;font-weight:800}
+  .res-head .sub{font-size:.8rem;opacity:.85;font-weight:600}
+  .res-head .chev{transition:transform .3s;font-size:1.1rem;opacity:.85}
+  .resources.collapsed .chev{transform:rotate(-90deg)}
+  .res-body{padding:20px 24px 24px;display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:16px}
+  .resources.collapsed .res-body{display:none}
+  .res-cat{border:1px solid var(--line);border-radius:14px;padding:14px 16px;background:#fbfcff}
+  .res-cat h5{font-size:.92rem;font-weight:800;margin-bottom:10px;display:flex;align-items:center;gap:8px;
+    padding-bottom:8px;border-bottom:1px solid var(--line)}
+  .res-cat ul{list-style:none}
+  .res-cat li{margin:8px 0;font-size:.86rem;line-height:1.45}
+  .res-cat a{color:var(--indigo);text-decoration:none;font-weight:700}
+  .res-cat a:hover{text-decoration:underline}
+  .res-cat .desc{color:var(--muted);font-weight:500;font-size:.8rem}
+  .free{display:inline-block;background:var(--green-soft);color:#0e9f6e;font-size:.62rem;font-weight:800;
+    padding:1px 6px;border-radius:5px;margin-left:4px;vertical-align:middle;text-transform:uppercase;letter-spacing:.03em}
+  .res-note{grid-column:1/-1;background:#fff8ec;border:1px solid #f6e2bd;border-radius:12px;padding:12px 16px;
+    font-size:.84rem;color:#92600f;line-height:1.5}
+  .res-note b{color:#7a4f0a}
+
   .footer{text-align:center;color:var(--muted);font-size:.78rem;margin-top:30px}
   .saved-flash{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(20px);
     background:var(--ink);color:#fff;padding:10px 18px;border-radius:99px;font-size:.82rem;font-weight:700;
@@ -175,6 +203,134 @@
     <p>Ton plan de bataille sur 6 mois. <b>Coche chaque tâche dès qu'elle est faite</b> — ton avancement
     est sauvegardé automatiquement dans ce navigateur, même après fermeture. Clique sur l'en-tête d'un mois
     pour le replier. Routine de base : <b>Lundi → Jeudi, 19h–22h</b> · <b>Vendredi = repos complet</b>.</p>
+  </div>
+
+  <div class="resources" id="resources">
+    <div class="res-head" onclick="document.getElementById('resources').classList.toggle('collapsed')">
+      <span class="emoji">🔗</span>
+      <div class="htxt">
+        <h2>Ressources pour apprendre &amp; s'exercer</h2>
+        <div class="sub">Sites de référence (gratuits en priorité) · clique pour replier</div>
+      </div>
+      <span class="chev">▾</span>
+    </div>
+    <div class="res-body">
+
+      <div class="res-cat">
+        <h5>🗄️ SQL</h5>
+        <ul>
+          <li><a href="https://sqlbolt.com" target="_blank" rel="noopener">SQLBolt</a><span class="free">gratuit</span><br><span class="desc">Leçons interactives, idéal pour débuter</span></li>
+          <li><a href="https://mode.com/sql-tutorial/" target="_blank" rel="noopener">Mode SQL Tutorial</a><span class="free">gratuit</span></li>
+          <li><a href="https://sqlzoo.net" target="_blank" rel="noopener">SQLZoo</a><span class="free">gratuit</span></li>
+          <li><a href="https://leetcode.com/problemset/database/" target="_blank" rel="noopener">LeetCode — Database</a> <span class="desc">exercices</span></li>
+          <li><a href="https://www.hackerrank.com/domains/sql" target="_blank" rel="noopener">HackerRank — SQL</a></li>
+          <li><a href="https://datalemur.com/questions" target="_blank" rel="noopener">DataLemur</a> <span class="desc">questions d'entretien</span></li>
+          <li><a href="https://www.stratascratch.com" target="_blank" rel="noopener">StrataScratch</a> <span class="desc">cas réels</span></li>
+          <li><a href="https://www.w3schools.com/sql/" target="_blank" rel="noopener">W3Schools SQL</a> <span class="desc">référence</span></li>
+        </ul>
+      </div>
+
+      <div class="res-cat">
+        <h5>📊 Excel</h5>
+        <ul>
+          <li><a href="https://www.excel-easy.com" target="_blank" rel="noopener">Excel Easy</a><span class="free">gratuit</span><br><span class="desc">Cours complet pas à pas</span></li>
+          <li><a href="https://exceljet.net" target="_blank" rel="noopener">ExcelJet</a> <span class="desc">formules & raccourcis</span></li>
+          <li><a href="https://support.microsoft.com/fr-fr/excel" target="_blank" rel="noopener">Microsoft — Formation Excel</a> <span class="desc">officiel</span></li>
+          <li><a href="https://excel-exercises.com" target="_blank" rel="noopener">Excel Exercises</a><span class="free">gratuit</span></li>
+          <li><a href="https://chandoo.org" target="_blank" rel="noopener">Chandoo</a> <span class="desc">tableaux de bord</span></li>
+        </ul>
+      </div>
+
+      <div class="res-cat">
+        <h5>📈 Power BI &amp; DAX</h5>
+        <ul>
+          <li><a href="https://learn.microsoft.com/fr-fr/training/powerplatform/power-bi" target="_blank" rel="noopener">Microsoft Learn — Power BI</a><span class="free">gratuit</span><br><span class="desc">Parcours officiel</span></li>
+          <li><a href="https://learn.microsoft.com/fr-fr/credentials/certifications/power-bi-data-analyst-associate/" target="_blank" rel="noopener">Certification PL-300</a> <span class="desc">officiel</span></li>
+          <li><a href="https://dax.guide" target="_blank" rel="noopener">DAX Guide (SQLBI)</a> <span class="desc">référence fonctions</span></li>
+          <li><a href="https://www.sqlbi.com" target="_blank" rel="noopener">SQLBI</a> <span class="desc">tutoriels DAX</span></li>
+          <li><a href="https://www.youtube.com/@GuyInACube" target="_blank" rel="noopener">Guy in a Cube</a> <span class="desc">YouTube</span></li>
+        </ul>
+      </div>
+
+      <div class="res-cat">
+        <h5>📉 Tableau</h5>
+        <ul>
+          <li><a href="https://public.tableau.com" target="_blank" rel="noopener">Tableau Public</a><span class="free">gratuit</span><br><span class="desc">Outil gratuit + galerie d'inspiration</span></li>
+          <li><a href="https://www.tableau.com/learn/training" target="_blank" rel="noopener">Tableau — Vidéos de formation</a> <span class="desc">officiel</span></li>
+          <li><a href="https://www.makeovermonday.co.uk" target="_blank" rel="noopener">Makeover Monday</a> <span class="desc">défi hebdo</span></li>
+          <li><a href="https://workout-wednesday.com" target="_blank" rel="noopener">Workout Wednesday</a> <span class="desc">exercices</span></li>
+        </ul>
+      </div>
+
+      <div class="res-cat">
+        <h5>🔎 Looker Studio</h5>
+        <ul>
+          <li><a href="https://lookerstudio.google.com" target="_blank" rel="noopener">Looker Studio</a><span class="free">gratuit</span><br><span class="desc">Ex-Data Studio, dashboards en ligne</span></li>
+          <li><a href="https://support.google.com/looker-studio" target="_blank" rel="noopener">Aide & modèles Looker Studio</a> <span class="desc">officiel</span></li>
+          <li><a href="https://cloud.google.com/looker/docs" target="_blank" rel="noopener">Looker (LookML) — docs</a></li>
+        </ul>
+      </div>
+
+      <div class="res-cat">
+        <h5>☁️ BigQuery</h5>
+        <ul>
+          <li><a href="https://cloud.google.com/bigquery/docs/sandbox" target="_blank" rel="noopener">BigQuery Sandbox</a><span class="free">gratuit</span><br><span class="desc">Sans carte bancaire</span></li>
+          <li><a href="https://cloud.google.com/bigquery/public-data" target="_blank" rel="noopener">Jeux de données publics</a><span class="free">gratuit</span></li>
+          <li><a href="https://cloud.google.com/bigquery/docs" target="_blank" rel="noopener">Documentation BigQuery</a> <span class="desc">officiel</span></li>
+          <li><a href="https://www.cloudskillsboost.google" target="_blank" rel="noopener">Google Cloud Skills Boost</a></li>
+        </ul>
+      </div>
+
+      <div class="res-cat">
+        <h5>🇬🇧 IELTS (anglais)</h5>
+        <ul>
+          <li><a href="https://takeielts.britishcouncil.org/take-ielts/prepare" target="_blank" rel="noopener">British Council — Préparation</a><span class="free">gratuit</span><br><span class="desc">Tests & ressources officiels</span></li>
+          <li><a href="https://www.ielts.org/for-test-takers/sample-test-questions" target="_blank" rel="noopener">IELTS.org — Questions types</a> <span class="desc">officiel</span></li>
+          <li><a href="https://ielts.idp.com/prepare" target="_blank" rel="noopener">IDP — Préparation IELTS</a></li>
+          <li><a href="https://ieltsliz.com" target="_blank" rel="noopener">IELTS Liz</a> <span class="desc">conseils & modèles</span></li>
+          <li><a href="https://www.youtube.com/@e2ielts" target="_blank" rel="noopener">E2 IELTS</a> <span class="desc">YouTube</span></li>
+          <li><a href="https://learnenglish.britishcouncil.org" target="_blank" rel="noopener">LearnEnglish</a><span class="free">gratuit</span> <span class="desc">listening / reading</span></li>
+        </ul>
+      </div>
+
+      <div class="res-cat">
+        <h5>🇫🇷 TCF (français)</h5>
+        <ul>
+          <li><a href="https://www.france-education-international.fr/test/tcf-canada" target="_blank" rel="noopener">France Éducation int. — TCF Canada</a> <span class="desc">concepteur officiel</span></li>
+          <li><a href="https://apprendre.tv5monde.com" target="_blank" rel="noopener">TV5Monde — Apprendre le français</a><span class="free">gratuit</span></li>
+          <li><a href="https://francaisfacile.rfi.fr" target="_blank" rel="noopener">RFI — Le français facile</a><span class="free">gratuit</span></li>
+          <li><a href="https://www.lepointdufle.net" target="_blank" rel="noopener">Le Point du FLE</a><span class="free">gratuit</span> <span class="desc">annuaire d'exercices</span></li>
+          <li><a href="https://www.prepmyfuture.com/tcf" target="_blank" rel="noopener">PrepMyFuture — TCF Canada</a> <span class="desc">partiellement gratuit</span></li>
+        </ul>
+      </div>
+
+      <div class="res-cat">
+        <h5>📁 Données &amp; projets</h5>
+        <ul>
+          <li><a href="https://www.kaggle.com" target="_blank" rel="noopener">Kaggle</a><span class="free">gratuit</span><br><span class="desc">Datasets pour ton portfolio</span></li>
+          <li><a href="https://www.kaggle.com/learn" target="_blank" rel="noopener">Kaggle Learn</a><span class="free">gratuit</span> <span class="desc">micro-cours</span></li>
+          <li><a href="https://www.mavenanalytics.io/data-playground" target="_blank" rel="noopener">Maven — Data Playground</a></li>
+          <li><a href="https://www.data.gouv.fr" target="_blank" rel="noopener">data.gouv.fr</a> <span class="desc">données ouvertes FR</span></li>
+          <li><a href="https://datasetsearch.research.google.com" target="_blank" rel="noopener">Google Dataset Search</a></li>
+        </ul>
+      </div>
+
+      <div class="res-cat">
+        <h5>🍁 Admin Canada</h5>
+        <ul>
+          <li><a href="https://www.wes.org/ca/" target="_blank" rel="noopener">WES Canada</a> <span class="desc">équivalence des diplômes</span></li>
+          <li><a href="https://www.canada.ca/fr/immigration-refugies-citoyennete.html" target="_blank" rel="noopener">IRCC</a> <span class="desc">immigration, officiel</span></li>
+          <li><a href="https://www.canada.ca/fr/immigration-refugies-citoyennete/services/immigrer-canada/entree-express.html" target="_blank" rel="noopener">Entrée express</a> <span class="desc">officiel</span></li>
+        </ul>
+      </div>
+
+      <div class="res-note">
+        ⚠️ <b>Deux points importants pour ton projet Canada :</b><br>
+        • Pour l'immigration IRCC, c'est l'<b>IELTS General Training</b> qu'il faut passer (et non l'Academic, réservé aux études).<br>
+        • Côté français, vise bien le <b>TCF Canada</b> précisément — c'est la version reconnue par IRCC.
+      </div>
+
+    </div>
   </div>
 
   <div id="calendar"></div>
