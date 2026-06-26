@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calendrier de suivi — Data & Canada 2026</title>
+<style>
+  :root{
+    --bg:#eef1f8;
+    --bg2:#e3e8f5;
+    --card:#ffffff;
+    --ink:#1e2440;
+    --muted:#6b7390;
+    --line:#e6e9f2;
+    --indigo:#4f46e5;
+    --gold:#f59e0b;
+    --green:#10b981;
+    --green-soft:#ecfdf5;
+    --shadow:0 10px 30px -12px rgba(34,40,80,.25);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:'Segoe UI',system-ui,-apple-system,Roboto,Arial,sans-serif;
+    background:linear-gradient(160deg,var(--bg),var(--bg2));
+    color:var(--ink);
+    line-height:1.5;
+    padding-bottom:60px;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ===== Top bar ===== */
+  .topbar{
+    position:sticky;top:0;z-index:50;
+    background:rgba(255,255,255,.85);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--line);
+    padding:14px clamp(16px,4vw,40px);
+  }
+  .topbar-inner{max-width:1080px;margin:0 auto;display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+  .brand{display:flex;flex-direction:column;gap:2px;margin-right:auto}
+  .brand h1{font-size:clamp(1rem,2.6vw,1.35rem);font-weight:800;letter-spacing:-.02em}
+  .brand span{font-size:.78rem;color:var(--muted);font-weight:600}
+  .global-prog{display:flex;align-items:center;gap:12px;min-width:240px;flex:1}
+  .bar{flex:1;height:12px;background:#dfe3f0;border-radius:99px;overflow:hidden}
+  .bar > i{display:block;height:100%;width:0;border-radius:99px;
+    background:linear-gradient(90deg,var(--indigo),#7c6cf6);transition:width .5s ease}
+  .pct{font-weight:800;font-size:.95rem;min-width:78px;text-align:right;font-variant-numeric:tabular-nums}
+  .actions{display:flex;gap:8px}
+  .btn{border:1px solid var(--line);background:#fff;color:var(--ink);
+    padding:8px 14px;border-radius:10px;font-weight:700;font-size:.82rem;cursor:pointer;
+    transition:.15s;white-space:nowrap}
+  .btn:hover{border-color:var(--indigo);color:var(--indigo)}
+  .btn.danger:hover{border-color:#ef4444;color:#ef4444}
+
+  /* ===== Layout ===== */
+  .wrap{max-width:1080px;margin:26px auto 0;padding:0 clamp(16px,4vw,40px)}
+  .intro{
+    background:var(--card);border-radius:18px;padding:22px 24px;box-shadow:var(--shadow);
+    border:1px solid var(--line);margin-bottom:26px;display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+  .intro .big{font-size:2rem}
+  .intro p{color:var(--muted);font-size:.92rem;max-width:760px}
+  .intro b{color:var(--ink)}
+
+  /* ===== Month card ===== */
+  .month{background:var(--card);border-radius:20px;box-shadow:var(--shadow);
+    border:1px solid var(--line);margin-bottom:24px;overflow:hidden}
+  .m-head{padding:20px 24px;color:#fff;cursor:pointer;display:flex;align-items:center;gap:16px;
+    position:relative;user-select:none}
+  .m-head .emoji{font-size:1.9rem}
+  .m-title{flex:1}
+  .m-title h2{font-size:1.25rem;font-weight:800;letter-spacing:-.01em}
+  .m-title .sub{font-size:.82rem;opacity:.9;font-weight:600}
+  .m-meta{display:flex;align-items:center;gap:14px}
+  .m-count{font-size:.8rem;font-weight:700;opacity:.95;font-variant-numeric:tabular-nums;white-space:nowrap}
+  .m-ring{position:relative;width:46px;height:46px;flex-shrink:0}
+  .m-ring svg{transform:rotate(-90deg)}
+  .m-ring .ringtxt{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+    font-size:.68rem;font-weight:800;color:#fff}
+  .chev{transition:transform .3s;font-size:1.1rem;opacity:.85}
+  .month.collapsed .chev{transform:rotate(-90deg)}
+  .m-body{padding:8px 24px 24px}
+  .month.collapsed .m-body{display:none}
+
+  /* schedule + goals banners */
+  .banner{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0 4px}
+  .chip{display:inline-flex;align-items:center;gap:7px;background:#f4f5fb;border:1px solid var(--line);
+    border-radius:10px;padding:7px 12px;font-size:.8rem;font-weight:600;color:var(--ink)}
+  .chip .dot{width:8px;height:8px;border-radius:99px;background:var(--indigo)}
+  .chip.rest .dot{background:#cbd2e6}
+  .goals{background:linear-gradient(135deg,#fff8ec,#fef3df);border:1px solid #f6e2bd;
+    border-radius:14px;padding:14px 16px;margin-top:16px}
+  .goals h4{font-size:.8rem;text-transform:uppercase;letter-spacing:.04em;color:#b8791b;margin-bottom:8px;
+    display:flex;align-items:center;gap:7px}
+  .goals ul{list-style:none;display:flex;flex-wrap:wrap;gap:8px}
+  .goals li{font-size:.82rem;font-weight:700;color:#92600f;background:#fff;border:1px solid #f1dcb0;
+    padding:5px 11px;border-radius:8px}
+
+  /* week block */
+  .week{margin-top:18px;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  .w-head{background:#f7f8fc;padding:11px 16px;display:flex;align-items:center;gap:10px;
+    border-bottom:1px solid var(--line)}
+  .w-head h3{font-size:.95rem;font-weight:800;flex:1}
+  .w-prog{font-size:.74rem;font-weight:700;color:var(--muted);font-variant-numeric:tabular-nums}
+  .section{padding:6px 16px}
+  .s-label{font-size:.74rem;font-weight:800;text-transform:uppercase;letter-spacing:.04em;
+    color:var(--indigo);margin:12px 0 6px;display:flex;align-items:center;gap:8px}
+  .s-label .time{color:var(--muted);font-weight:700;text-transform:none;letter-spacing:0;
+    background:#eef0fa;padding:2px 8px;border-radius:6px;font-size:.72rem}
+  .s-label.weekend{color:#0e9f6e}
+  .s-label.weekend .time{background:var(--green-soft)}
+
+  /* task row */
+  .task{display:flex;align-items:flex-start;gap:11px;padding:8px 8px;border-radius:10px;cursor:pointer;
+    transition:background .12s}
+  .task:hover{background:#f6f7fc}
+  .task input{display:none}
+  .box{width:21px;height:21px;border:2px solid #c3c9de;border-radius:6px;flex-shrink:0;margin-top:1px;
+    display:flex;align-items:center;justify-content:center;transition:.15s;background:#fff}
+  .box svg{width:13px;height:13px;stroke:#fff;stroke-width:3.4;fill:none;
+    stroke-dasharray:18;stroke-dashoffset:18;transition:stroke-dashoffset .2s}
+  .task input:checked + .box{background:var(--green);border-color:var(--green)}
+  .task input:checked + .box svg{stroke-dashoffset:0}
+  .task .lbl{font-size:.9rem;transition:.15s}
+  .task input:checked ~ .lbl{color:var(--muted);text-decoration:line-through;text-decoration-color:#b6bdd4}
+
+  /* notes */
+  .notes{margin-top:16px}
+  .notes label{font-size:.74rem;font-weight:800;text-transform:uppercase;letter-spacing:.04em;
+    color:var(--muted);display:block;margin-bottom:6px}
+  .notes textarea{width:100%;border:1px solid var(--line);border-radius:12px;padding:12px;
+    font-family:inherit;font-size:.88rem;resize:vertical;min-height:64px;color:var(--ink);background:#fbfcff}
+  .notes textarea:focus{outline:none;border-color:var(--indigo)}
+
+  .footer{text-align:center;color:var(--muted);font-size:.78rem;margin-top:30px}
+  .saved-flash{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(20px);
+    background:var(--ink);color:#fff;padding:10px 18px;border-radius:99px;font-size:.82rem;font-weight:700;
+    opacity:0;transition:.3s;pointer-events:none;z-index:100}
+  .saved-flash.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+  @media print{
+    .topbar,.actions,.chev,.intro,.footer{display:none!important}
+    body{background:#fff}
+    .month.collapsed .m-body{display:block!important}
+    .month{box-shadow:none;break-inside:avoid}
+  }
+  @media(max-width:560px){
+    .global-prog{order:3;width:100%}
+    .pct{min-width:60px}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <h1>📊 Suivi Data &amp; Canada — 2026</h1>
+      <span>De SQL au dossier IRCC · objectif décembre</span>
+    </div>
+    <div class="global-prog">
+      <div class="bar"><i id="globalBar"></i></div>
+      <div class="pct" id="globalPct">0%</div>
+    </div>
+    <div class="actions">
+      <button class="btn" onclick="toggleAll(false)">Tout déplier</button>
+      <button class="btn" onclick="window.print()">🖨️ Imprimer</button>
+      <button class="btn danger" onclick="resetAll()">↺ Réinitialiser</button>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="intro">
+    <div class="big">🎯</div>
+    <p>Ton plan de bataille sur 6 mois. <b>Coche chaque tâche dès qu'elle est faite</b> — ton avancement
+    est sauvegardé automatiquement dans ce navigateur, même après fermeture. Clique sur l'en-tête d'un mois
+    pour le replier. Routine de base : <b>Lundi → Jeudi, 19h–22h</b> · <b>Vendredi = repos complet</b>.</p>
+  </div>
+
+  <div id="calendar"></div>
+
+  <div class="footer">Calendrier personnel · données stockées localement sur cet appareil · 2026</div>
+</div>
+
+<div class="saved-flash" id="flash">✓ Enregistré</div>
+
+<script>
+/* ============ DONNÉES DU PLAN ============ */
+const COLORS = {
+  jul:["#4f46e5","#7c6cf6"], aug:["#7c3aed","#a78bfa"], sep:["#2563eb","#60a5fa"],
+  oct:["#0d9488","#2dd4bf"], nov:["#d97706","#fbbf24"], dec:["#e11d48","#fb7185"]
+};
+
+const MONTHS = [
+{
+  id:"jul", emoji:"📅", name:"Juillet 2026 — Les Fondations",
+  sub:"Lun→Jeu 19h–22h · 19h-21h Data, 21h-22h IELTS · Vendredi repos",
+  schedule:[ {t:"19h-21h : Formation Data"}, {t:"21h-22h : Préparation IELTS"}, {t:"Vendredi : repos complet", rest:true} ],
+  goals:["SQL solide","Excel avancé","WES lancé","1 projet GitHub"],
+  weeks:[
+    { title:"Semaine 1 — SQL Débutant + WES", sections:[
+      { label:"En semaine — SQL uniquement", time:"19h-21h", tasks:[
+        "Maîtriser SELECT","Maîtriser WHERE","Maîtriser ORDER BY","Maîtriser GROUP BY",
+        "Maîtriser HAVING","Maîtriser JOIN","Agrégations : COUNT, SUM, AVG","Faire 20 à 30 exercices SQL"]},
+      { label:"Le soir — IELTS", time:"21h-22h", tasks:[
+        "Découvrir le format de l'IELTS","Faire un premier test de niveau"]},
+      { label:"Samedi", time:"9h30-12h30", weekend:true, tasks:[
+        "Révision complète du SQL","Exercices LeetCode (SQL)","Réaliser un mini projet SQL"]},
+      { label:"Dimanche — WES", time:"10h-12h", weekend:true, tasks:[
+        "Payer le WES","Créer le dossier WES","Préparer les documents","Contacter l'université si nécessaire",
+        "Après-midi : repos"]}
+    ]},
+    { title:"Semaine 2 — Excel avancé", sections:[
+      { label:"En semaine — Excel (si SQL bien compris)", time:"19h-21h", tasks:[
+        "RECHERCHEX","INDEX / EQUIV","Fonction SI","Tableaux croisés dynamiques",
+        "Graphiques","Power Query"]},
+      { label:"Chaque soir — IELTS", time:"21h-22h", tasks:[
+        "1h d'IELTS : Reading","1h d'IELTS : Listening"]},
+      { label:"Samedi", weekend:true, tasks:["Créer un tableau de bord Excel"]},
+      { label:"Dimanche", weekend:true, tasks:["Test IELTS : Reading","Test IELTS : Listening"]}
+    ]},
+    { title:"Semaine 3 — Excel + SQL (consolidation)", sections:[
+      { label:"En semaine", time:"19h-21h", tasks:[
+        "Exercices SQL","Fonctions Excel avancées","Nettoyage de données","Import / export CSV"]},
+      { label:"Chaque soir — IELTS", time:"21h-22h", tasks:["IELTS tous les soirs"]},
+      { label:"Week-end — Projet", weekend:true, tasks:[
+        "Projet : Analyse des ventes avec Excel + SQL"]}
+    ]},
+    { title:"Semaine 4 — Premier Portfolio", sections:[
+      { label:"En semaine — Projet complet", time:"19h-21h", tasks:[
+        "Partie SQL du projet","Partie Excel du projet","Rédiger la documentation","Publier sur GitHub"]},
+      { label:"Le soir — IELTS", time:"21h-22h", tasks:["Préparation IELTS"]},
+      { label:"Week-end", weekend:true, tasks:["Finaliser le GitHub","Révision IELTS"]}
+    ]}
+  ]
+},
+{
+  id:"aug", emoji:"📊", name:"Août 2026 — Business Intelligence",
+  sub:"Lun→Jeu 19h–22h · 19h-21h Power BI, 21h-22h IELTS",
+  schedule:[ {t:"19h-21h : Power BI"}, {t:"21h-22h : Préparation IELTS"}, {t:"Vendredi : repos complet", rest:true} ],
+  goals:["2 à 3 projets Power BI","Bases de BigQuery","Niveau PL-300","IELTS presque prêt"],
+  weeks:[
+    { title:"Semaine 1 — Power BI", sections:[
+      { label:"En semaine", time:"19h-21h", tasks:[
+        "Interface","Importation","Relations","Visualisations","Slicers","KPI"]},
+      { label:"Le soir — IELTS", time:"21h-22h", tasks:["Préparation IELTS"]},
+      { label:"Week-end", weekend:true, tasks:[
+        "Créer un tableau de bord","Commencer les révisions PL-300"]}
+    ]},
+    { title:"Semaine 2 — DAX", sections:[
+      { label:"En semaine", time:"19h-21h", tasks:[
+        "CALCULATE","FILTER","SUMX","RELATED","Time Intelligence"]},
+      { label:"Le soir — IELTS", time:"21h-22h", tasks:["Préparation IELTS"]},
+      { label:"Week-end", weekend:true, tasks:[
+        "Créer un dashboard professionnel","Révision PL-300"]}
+    ]},
+    { title:"Semaine 3 — Niveau supérieur (BigQuery)", sections:[
+      { label:"En semaine (si Power BI bien assimilé)", time:"19h-21h", tasks:[
+        "Connexion Power BI ↔ BigQuery","Requêtes sur de gros volumes","Optimisation des performances"]},
+      { label:"Le soir — IELTS", time:"21h-22h", tasks:["Préparation IELTS"]},
+      { label:"Week-end", weekend:true, tasks:["Projet complet BI","Révision IELTS"]}
+    ]},
+    { title:"Semaine 4 — Révisions", sections:[
+      { label:"Toute la semaine", time:"19h-21h", tasks:[
+        "Exercices Power BI","Exercices SQL","Questions PL-300","Corriger les points faibles"]},
+      { label:"Le soir — IELTS", time:"21h-22h", tasks:["Préparation IELTS"]},
+      { label:"Week-end", weekend:true, tasks:["Examen blanc PL-300","Test IELTS complet"]}
+    ]}
+  ]
+},
+{
+  id:"sep", emoji:"🎓", name:"Septembre 2026 — Certifications & Langues",
+  sub:"Lun→Jeu 19h–22h · 19h-20h30 révisions tech, 20h30-22h IELTS puis TCF",
+  schedule:[ {t:"19h-20h30 : Révisions techniques"}, {t:"20h30-22h : IELTS puis TCF"}, {t:"Vendredi : repos complet", rest:true} ],
+  goals:["IELTS passé","PL-300 passée","Préparation TCF lancée"],
+  weeks:[
+    { title:"Semaine 1 — IELTS", sections:[
+      { label:"Objectif de la semaine", tasks:[
+        "Passer l'IELTS (ou dernière préparation si la date est en fin de mois)"]},
+      { label:"Révisions techniques", time:"19h-20h30", tasks:[
+        "SQL","Power BI","BigQuery","Portfolio"]}
+    ]},
+    { title:"Semaine 2 — PL-300", sections:[
+      { label:"Objectif de la semaine", tasks:["Passer la certification PL-300"]},
+      { label:"Révisions techniques", time:"19h-20h30", tasks:["SQL","Power BI","BigQuery","Portfolio"]}
+    ]},
+    { title:"Semaine 3 — Début TCF intensif", sections:[
+      { label:"Préparation TCF", time:"20h30-22h", tasks:[
+        "Compréhension orale","Compréhension écrite","Expression orale","Expression écrite"]},
+      { label:"Révisions techniques", time:"19h-20h30", tasks:["SQL","Power BI","BigQuery","Portfolio"]}
+    ]},
+    { title:"Semaine 4 — Révisions générales", sections:[
+      { label:"Révisions complètes", tasks:[
+        "SQL","Power BI","BigQuery","Portfolio","TCF"]}
+    ]}
+  ]
+},
+{
+  id:"oct", emoji:"🚀", name:"Octobre 2026 — TCF & Portfolio",
+  sub:"Passage du TCF, montée en puissance du portfolio, premières candidatures",
+  schedule:[],
+  goals:["TCF passé","Portfolio 4 à 6 projets","Candidatures lancées"],
+  weeks:[
+    { title:"Objectifs du mois", sections:[
+      { label:"À réaliser", tasks:[
+        "Passer le TCF",
+        "Améliorer le portfolio (atteindre 4 à 6 projets)",
+        "Débuter les candidatures (si recherche d'emploi souhaitée)"]}
+    ]}
+  ]
+},
+{
+  id:"nov", emoji:"📁", name:"Novembre 2026 — Mois administratif",
+  sub:"Vérifier, rassembler et mettre à jour tous les documents",
+  schedule:[],
+  goals:["WES terminé","Documents prêts","Résultats vérifiés","Profils à jour"],
+  weeks:[
+    { title:"Tâches administratives", sections:[
+      { label:"À vérifier & préparer", tasks:[
+        "Vérifier que le WES est terminé",
+        "Préparer les diplômes",
+        "Préparer le passeport",
+        "Préparer le CV",
+        "Préparer les attestations",
+        "Préparer les preuves financières",
+        "Rassembler les autres documents nécessaires",
+        "Vérifier les résultats IELTS",
+        "Vérifier les résultats TCF",
+        "Mettre à jour LinkedIn",
+        "Mettre à jour GitHub"]}
+    ]}
+  ]
+},
+{
+  id:"dec", emoji:"🍁", name:"Décembre 2026 — Dossier IRCC",
+  sub:"Objectif unique : ouvrir le dossier IRCC avec tous les documents prêts",
+  schedule:[],
+  goals:["Dossier IRCC ouvert 🎉"],
+  weeks:[
+    { title:"Objectif unique du mois", sections:[
+      { label:"Le grand objectif", tasks:[
+        "Réunir tous les documents définitifs",
+        "Ouvrir le dossier IRCC",
+        "Soumettre / finaliser ton dossier"]}
+    ]}
+  ]
+}
+];
+
+/* ============ STOCKAGE ============ */
+const KEY="suivi2026", NKEY="suivi2026_notes";
+let state = JSON.parse(localStorage.getItem(KEY) || "{}");
+let notes = JSON.parse(localStorage.getItem(NKEY) || "{}");
+const save = ()=>{ localStorage.setItem(KEY,JSON.stringify(state)); flash(); };
+const saveNotes = ()=> localStorage.setItem(NKEY,JSON.stringify(notes));
+
+let flashT;
+function flash(){ const f=document.getElementById('flash'); f.classList.add('show');
+  clearTimeout(flashT); flashT=setTimeout(()=>f.classList.remove('show'),1200); }
+
+/* ============ RENDU ============ */
+const CHECK = '<svg viewBox="0 0 24 24"><polyline points="4 12 10 18 20 6"/></svg>';
+
+function ring(pct,c1,c2){
+  const r=18, circ=2*Math.PI*r, off=circ*(1-pct/100);
+  return `<div class="m-ring"><svg width="46" height="46">
+    <circle cx="23" cy="23" r="${r}" fill="none" stroke="rgba(255,255,255,.3)" stroke-width="5"/>
+    <circle cx="23" cy="23" r="${r}" fill="none" stroke="#fff" stroke-width="5"
+      stroke-linecap="round" stroke-dasharray="${circ}" stroke-dashoffset="${off}"
+      style="transition:stroke-dashoffset .5s"/>
+  </svg><div class="ringtxt">${pct}%</div></div>`;
+}
+
+function build(){
+  const root=document.getElementById('calendar');
+  root.innerHTML="";
+  MONTHS.forEach((m,mi)=>{
+    const [c1,c2]=COLORS[m.id];
+    const el=document.createElement('div');
+    el.className="month"; el.dataset.month=mi;
+
+    let html=`<div class="m-head" style="background:linear-gradient(120deg,${c1},${c2})" onclick="toggleMonth(${mi})">
+      <span class="emoji">${m.emoji}</span>
+      <div class="m-title"><h2>${m.name}</h2><div class="sub">${m.sub}</div></div>
+      <div class="m-meta">
+        <span class="m-count" id="cnt-${mi}"></span>
+        <span id="ring-${mi}"></span>
+        <span class="chev">▾</span>
+      </div></div><div class="m-body">`;
+
+    if(m.schedule.length){
+      html+=`<div class="banner">`;
+      m.schedule.forEach(s=> html+=`<span class="chip${s.rest?' rest':''}"><span class="dot"></span>${s.t}</span>`);
+      html+=`</div>`;
+    }
+
+    m.weeks.forEach((w,wi)=>{
+      html+=`<div class="week"><div class="w-head"><h3>${w.title}</h3>
+        <span class="w-prog" id="wp-${mi}-${wi}"></span></div>`;
+      w.sections.forEach((s,si)=>{
+        html+=`<div class="section"><div class="s-label${s.weekend?' weekend':''}">${s.label}
+          ${s.time?`<span class="time">${s.time}</span>`:''}</div>`;
+        s.tasks.forEach((t,ti)=>{
+          const id=`${mi}-${wi}-${si}-${ti}`;
+          const ck=state[id]?'checked':'';
+          html+=`<label class="task"><input type="checkbox" data-id="${id}" ${ck} onchange="onCheck(this)">
+            <span class="box">${CHECK}</span><span class="lbl">${t}</span></label>`;
+        });
+        html+=`</div>`;
+      });
+      html+=`</div>`;
+    });
+
+    if(m.goals.length){
+      html+=`<div class="goals"><h4>🏆 Objectifs de fin de mois</h4><ul>`;
+      m.goals.forEach(g=> html+=`<li>${g}</li>`);
+      html+=`</ul></div>`;
+    }
+
+    html+=`<div class="notes"><label>📝 Mes notes du mois</label>
+      <textarea data-note="${m.id}" placeholder="Réflexions, blocages, idées de projets, dates d'examen...">${notes[m.id]||''}</textarea></div>`;
+
+    html+=`</div>`;
+    el.innerHTML=html;
+    root.appendChild(el);
+  });
+
+  document.querySelectorAll('textarea[data-note]').forEach(t=>{
+    t.addEventListener('input',()=>{ notes[t.dataset.note]=t.value; saveNotes(); });
+  });
+  updateAll();
+}
+
+/* ============ INTERACTIONS ============ */
+function onCheck(box){
+  const id=box.dataset.id;
+  if(box.checked) state[id]=1; else delete state[id];
+  save(); updateAll();
+}
+
+function allIds(){ return Array.from(document.querySelectorAll('input[data-id]')).map(i=>i.dataset.id); }
+
+function updateAll(){
+  const ids=allIds();
+  const total=ids.length, done=ids.filter(i=>state[i]).length;
+  const pct = total? Math.round(done/total*100):0;
+  document.getElementById('globalBar').style.width=pct+"%";
+  document.getElementById('globalPct').textContent=pct+"% · "+done+"/"+total;
+
+  MONTHS.forEach((m,mi)=>{
+    let mt=0,md=0;
+    m.weeks.forEach((w,wi)=>{
+      let wt=0,wd=0;
+      w.sections.forEach((s,si)=> s.tasks.forEach((t,ti)=>{
+        const id=`${mi}-${wi}-${si}-${ti}`; wt++; if(state[id]) wd++;
+      }));
+      mt+=wt; md+=wd;
+      const wp=document.getElementById(`wp-${mi}-${wi}`);
+      if(wp) wp.textContent=`${wd}/${wt}`;
+    });
+    const mpct= mt? Math.round(md/mt*100):0;
+    document.getElementById(`cnt-${mi}`).textContent=`${md}/${mt}`;
+    const [c1,c2]=COLORS[m.id];
+    document.getElementById(`ring-${mi}`).innerHTML=ring(mpct,c1,c2);
+  });
+}
+
+function toggleMonth(mi){
+  document.querySelector(`.month[data-month="${mi}"]`).classList.toggle('collapsed');
+}
+let allCollapsed=false;
+function toggleAll(force){
+  allCollapsed = (force===undefined)? !allCollapsed : force;
+  document.querySelectorAll('.month').forEach(el=> el.classList.toggle('collapsed',allCollapsed));
+}
+function resetAll(){
+  if(confirm("Réinitialiser toutes les cases cochées ? (tes notes seront conservées)")){
+    state={}; localStorage.removeItem(KEY);
+    document.querySelectorAll('input[data-id]').forEach(i=>i.checked=false);
+    updateAll();
+  }
+}
+
+build();
+</script>
+</body>
+</html>
