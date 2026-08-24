@@ -28,14 +28,36 @@
       <div class="projet-cards">
         <article class="card" tabindex="0">
           <div class="card-meta">
-            <span>Projet Décisionnel • SQL & Power BI</span>
+            <span>Modélisation de données</span>
             <span>2026</span>
           </div>
-          <h3><i class="fa-solid fa-database"></i> Pilotage ClassicModels</h3>
-          <p>Projet de groupe (3 analystes) : conception d'une solution d'aide à la décision pour le distributeur ClassicModels, de la base transactionnelle au tableau de bord. Requêtes SQL et mesures DAX pour bâtir les indicateurs, restitués dans un dashboard Power BI. En charge de l'axe Ressources Humaines & Bureaux.</p>
-          <span class="focus-text">SQL • DAX • Power BI</span>
-          <a href="https://github.com/suzy5670/suzy5670.github.io/tree/main/projets/classicmodels-powerbi" target="_blank" rel="noopener noreferrer" class="card-link">
-            <i class="fa-brands fa-github"></i> Voir le projet & les fichiers
+          <h3><i class="fa-solid fa-database"></i> ClassicModels — Modélisation SQL en étoile</h3>
+          <p>Conception d'un modèle en étoile (dimensions / faits) sur la base ClassicModels : tables de dates, clients, produits, employés/bureaux, et faits ventes, paiements, logistique. Vues SQL, CTE récursif pour la dimension de dates et fonctions fenêtres pour le suivi des ventes cumulées. Projet de groupe (3 analystes), axe Ressources Humaines & Bureaux.</p>
+          <pre class="code-snippet"><code>CREATE OR REPLACE VIEW fact_sales AS
+SELECT
+    o.orderNumber, od.productCode, o.customerNumber,
+    o.orderDate, od.quantityOrdered, od.priceEach,
+    (od.quantityOrdered * od.priceEach) AS totalRevenue,
+    ((od.priceEach - p.buyPrice) * od.quantityOrdered) AS margin
+FROM orders o
+JOIN orderdetails od ON o.orderNumber = od.orderNumber
+JOIN products p ON od.productCode = p.productCode;</code></pre>
+          <span class="focus-text">SQL • Modélisation en étoile • Window Functions</span>
+          <a href="https://github.com/suzy5670/suzy5670.github.io/blob/main/projets/classicmodels-powerbi/commande%20sql%20classic%2Bdbr.sql" target="_blank" rel="noopener noreferrer" class="card-link">
+            <i class="fa-solid fa-file-code"></i> Voir le script SQL complet
+          </a>
+        </article>
+        <article class="card" tabindex="0">
+          <div class="card-meta">
+            <span>Business Intelligence</span>
+            <span>2026</span>
+          </div>
+          <img src="projets/classicmodels-powerbi/dashboard-rh.png" alt="Dashboard Power BI — Ressources Humaines & Bureaux" class="dashboard-preview" />
+          <h3><i class="fa-solid fa-chart-column"></i> Dashboard Power BI — Ressources Humaines & Bureaux</h3>
+          <p>Restitution Power BI de l'axe Ressources Humaines & Bureaux du projet ClassicModels : effectifs par bureau, répartition géographique des équipes et rattachements hiérarchiques, construits à partir du modèle SQL en étoile.</p>
+          <span class="focus-text">Power BI • DAX • RH</span>
+          <a href="https://github.com/suzy5670/suzy5670.github.io/blob/main/projets/classicmodels-powerbi/RH.pbix" target="_blank" rel="noopener noreferrer" class="card-link">
+            <i class="fa-solid fa-file-arrow-down"></i> Télécharger le fichier .pbix
           </a>
         </article>
         <article class="card" tabindex="0">
