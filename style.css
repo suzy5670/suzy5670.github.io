@@ -302,6 +302,59 @@ a { color: inherit; text-decoration: none; }
 .certif-card p { margin: 0; font-size: 0.95rem; color: #dbeafe; font-weight: 500; }
 .certif-icon { font-size: 2.5rem; color: var(--accent); }
 
+/* RGPD / CNIL */
+.section-subtitle {
+  text-align: center;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 4.5rem 0 0.5rem;
+}
+.rgpd-modules {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.2rem;
+  margin-top: 2.5rem;
+}
+.rgpd-module {
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.3rem 1.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  transition: border-color 0.3s ease;
+}
+.rgpd-module:hover { border-color: var(--accent); }
+.rgpd-module h4 {
+  margin: 0;
+  font-size: 0.98rem;
+  color: var(--ink);
+  font-weight: 600;
+}
+.rgpd-module .rgpd-num {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--muted);
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.rgpd-score {
+  flex-shrink: 0;
+  background-color: var(--soft);
+  border: 1px solid var(--border);
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 0.95rem;
+  padding: 0.4rem 0.7rem;
+  border-radius: 8px;
+}
+.rgpd-download { text-align: center; margin-top: 2.8rem; }
+
 .projet-cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
